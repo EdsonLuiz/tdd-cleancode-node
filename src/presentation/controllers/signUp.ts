@@ -6,7 +6,7 @@ class SignUpController {
   static handle(httpRequest: HttpRequest): HttpResponse {
     let httpResponse = {} as HttpResponse;
 
-    const requiredField = ['name', 'email', 'password'];
+    const requiredField = ['name', 'email', 'password', 'passwordConfirmation'];
 
     httpResponse = requiredField.reduce((_httpResponse, field) => {
       if (!httpRequest.body[field]) return badRequest(new MissingParamError(field));
