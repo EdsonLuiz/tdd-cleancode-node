@@ -27,9 +27,11 @@ class SignUpController implements Controller {
 
       if (noPresentField) return badRequest(new MissingParamError(noPresentField));
 
-      if (httpRequest.body.password !== httpRequest.body.passwordConfirmation) return badRequest(new InvalidParamError('passwordConfirmation'));
+      const { email, password, passwordConfirmation } = httpRequest.body;
 
-      const isValid = this.emailValidator.isValid(httpRequest.body.email);
+      if (password !== passwordConfirmation) return badRequest(new InvalidParamError('passwordConfirmation'));
+
+      const isValid = this.emailValidator.isValid(email);
       if (!isValid) return badRequest(new InvalidParamError('email'));
 
       return {} as HttpResponse;
