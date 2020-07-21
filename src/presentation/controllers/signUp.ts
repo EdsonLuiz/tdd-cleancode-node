@@ -16,8 +16,6 @@ class SignUpController implements Controller {
 
   handle(httpRequest: HttpRequest): HttpResponse {
     try {
-      let httpResponse = {} as HttpResponse;
-
       const requiredField = [
         'name',
         'email',
@@ -25,15 +23,16 @@ class SignUpController implements Controller {
         'passwordConfirmation',
       ];
 
-      httpResponse = requiredField.reduce((_httpResponse, field) => {
-        if (!httpRequest.body[field]) return badRequest(new MissingParamError(field));
-        return _httpResponse;
-      }, {} as HttpResponse);
+      const noPresentField = requiredField.find((field) => !httpRequest.body[field]);
+
+      if (noPresentField) return badRequest(new MissingParamError(noPresentField));
+
+      if (httpRequest.body.password !== httpRequest.body.passwordConfirmation) return badRequest(new InvalidParamError('passwordConfirmation'));
 
       const isValid = this.emailValidator.isValid(httpRequest.body.email);
-      if (!isValid) httpResponse = badRequest(new InvalidParamError('email'));
+      if (!isValid) return badRequest(new InvalidParamError('email'));
 
-      return httpResponse;
+      return {} as HttpResponse;
     } catch (err) {
       return serverError();
     }
