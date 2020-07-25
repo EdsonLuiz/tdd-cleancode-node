@@ -1,8 +1,15 @@
-import SignUpController from './signUp';
-import { MissingParamError, InvalidParamError, ServerError } from '../../errors';
+import SignUpController from '@/presentation/controllers/signUp/signUp';
 import {
-  EmailValidator, AccountModel, AddAccount, AddAccountModel,
-} from './signup-protocols';
+  MissingParamError,
+  InvalidParamError,
+  ServerError,
+} from '@/presentation/errors';
+import {
+  EmailValidator,
+  AccountModel,
+  AddAccount,
+  AddAccountModel,
+} from '@/presentation/controllers/signUp/signup-protocols';
 
 const makeEmailValidator = (): EmailValidator => {
   class EmailValidatorStub implements EmailValidator {
@@ -199,7 +206,11 @@ describe('SignUp Controller', () => {
 
   it('should return 500 if AddAccount throws', async () => {
     const { sut, addAccountStub } = makeSut();
-    jest.spyOn(addAccountStub, 'add').mockImplementationOnce(async () => new Promise((resolve, reject) => reject(new Error())));
+    jest
+      .spyOn(addAccountStub, 'add')
+      .mockImplementationOnce(
+        async () => new Promise((resolve, reject) => reject(new Error())),
+      );
 
     const httpRequest = {
       body: {

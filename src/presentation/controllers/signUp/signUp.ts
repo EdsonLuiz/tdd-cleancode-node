@@ -1,12 +1,17 @@
+import { MissingParamError, InvalidParamError } from '@/presentation/errors';
 import {
   HttpResponse,
   HttpRequest,
   Controller,
   EmailValidator,
   AddAccount,
-} from './signup-protocols';
-import { MissingParamError, InvalidParamError } from '../../errors';
-import { badRequest, serverError, ok } from '../../helpers/http-helper';
+} from '@/presentation/controllers/signUp/signup-protocols';
+// import { MissingParamError, InvalidParamError } from '../../errors';
+import {
+  badRequest,
+  serverError,
+  ok,
+} from '@/presentation/helpers/http-helper';
 
 class SignUpController implements Controller {
   private readonly emailValidator: EmailValidator;
@@ -27,7 +32,9 @@ class SignUpController implements Controller {
         'passwordConfirmation',
       ];
 
-      const noPresentField = requiredField.find((field) => !httpRequest.body[field]);
+      const noPresentField = requiredField.find(
+        (field) => !httpRequest.body[field],
+      );
 
       if (noPresentField) return badRequest(new MissingParamError(noPresentField));
 
