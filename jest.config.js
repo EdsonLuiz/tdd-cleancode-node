@@ -136,7 +136,7 @@ module.exports = {
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  testEnvironment: "node",
+  // testEnvironment: "node",
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
@@ -169,6 +169,8 @@ module.exports = {
 
   // Setting this value to "fake" allows the use of fake timers for functions such as "setTimeout"
   // timers: "real",
+
+  preset: "@shelf/jest-mongodb",
 
   // A map from regular expressions to paths to transformers
   transform: { ".+\\.ts$": "ts-jest" },
