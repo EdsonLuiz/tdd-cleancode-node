@@ -15,4 +15,9 @@ export const MongoHelper = {
   getCollection(name: string): Collection {
     return this.connection.db().collection(name);
   },
+  map: (collection: any): any => {
+    const { _id: id, ...rest } = collection;
+    const parsedCollection = { ...rest, id };
+    return parsedCollection;
+  },
 };
