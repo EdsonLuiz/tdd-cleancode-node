@@ -25,10 +25,13 @@
     "lint-staged": "^10.2.11",
     "supertest": "^4.0.2",
     "ts-jest": "^26.1.1",
+    "ts-node-dev": "^1.0.0-pre.57",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^3.9.5"
   },
   "scripts": {
     "start": "sucrase-node src/main/server.ts",
+    "dev:server": "ts-node-dev -r tsconfig-paths/register -T --ignore-watch node_modules src/main/server.ts",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "yarn test --watch -c jest-unit-config.js",
