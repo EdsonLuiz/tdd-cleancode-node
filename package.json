@@ -3,5 +3,48 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "Edson Luiz Ribeiro Rodrigues <edsonrodrigues@icloud.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@shelf/jest-mongodb": "^1.2.1",
+    "@types/bcrypt": "^3.0.0",
+    "@types/express": "^4.17.7",
+    "@types/jest": "^26.0.4",
+    "@types/mongodb": "^3.5.25",
+    "@types/node": "^14.0.14",
+    "@types/supertest": "^2.0.10",
+    "@types/validator": "^13.1.0",
+    "@typescript-eslint/eslint-plugin": "^3.6.0",
+    "@typescript-eslint/parser": "^3.6.0",
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-import-resolver-typescript": "^2.0.0",
+    "eslint-plugin-import": "^2.21.2",
+    "git-commit-msg-linter": "^2.4.4",
+    "husky": "^4.2.5",
+    "jest": "^26.1.0",
+    "lint-staged": "^10.2.11",
+    "supertest": "^4.0.2",
+    "ts-jest": "^26.1.1",
+    "ts-node-dev": "^1.0.0-pre.57",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^3.9.5"
+  },
+  "scripts": {
+    "start": "sucrase-node src/main/server.ts",
+    "dev:server": "ts-node-dev -r tsconfig-paths/register -T --ignore-watch node_modules src/main/server.ts",
+    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
+    "test:verbose": "jest --passWithNoTests --runInBand",
+    "test:unit": "yarn test --watch -c jest-unit-config.js",
+    "test:integration": "yarn test --watch -c jest-integration-config.js",
+    "test:staged": "yarn test --findRelatedTests",
+    "test:ci": "yarn test --coverage"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "express": "^4.17.1",
+    "fast-glob": "^3.2.4",
+    "mongodb": "^3.5.9",
+    "sucrase": "^3.15.0",
+    "validator": "^13.1.1"
+  }
 }
